@@ -1,8 +1,11 @@
-mysql> insert into employee_payroll (name, salary, start) values	# inserting values table
-    -> ('Bill', 1000000.88, '2018-01-03' ),
-    -> ('Terisa', 2000000.88, '2019-05-13' ),
-    -> ('Charlie', 6000000.88, '2020-11-21' );
-Query OK, 3 rows affected (0.01 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+mysql> select * from employee_payroll;			# for view data in table
++----+---------+------------+------------+
+| id | name    | salary     | start      |
++----+---------+------------+------------+
+|  1 | Bill    | 1000000.88 | 2018-01-03 |
+|  2 | Terisa  | 2000000.88 | 2019-05-13 |
+|  3 | Charlie | 6000000.88 | 2020-11-21 |
++----+---------+------------+------------+
+3 rows in set (0.00 sec)
 
 mysql>
