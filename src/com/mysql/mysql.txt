@@ -1,4 +1,14 @@
-mysql> select * from employee_payroll;			# for view data in table
+mysql> select salary from employee_payroll where name = 'Bill';
++------------+
+| salary     |
++------------+
+| 1000000.88 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee_payroll
+    -> where start between cast('2018-01-03' as date)
+    -> and date(now());
 +----+---------+------------+------------+
 | id | name    | salary     | start      |
 +----+---------+------------+------------+
