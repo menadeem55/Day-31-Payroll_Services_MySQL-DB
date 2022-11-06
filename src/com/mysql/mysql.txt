@@ -7,6 +7,10 @@ mysql> select salary from employee_payroll where name = 'Bill';
 1 row in set (0.00 sec)
 
 mysql> select * from employee_payroll
+    -> where startdate between cast('2018-01-03' as date)
+    -> and date(now());
+ERROR 1054 (42S22): Unknown column 'startdate' in 'where clause'
+mysql> select * from employee_payroll
     -> where start between cast('2018-01-03' as date)
     -> and date(now());
 +----+---------+------------+------------+
@@ -16,6 +20,63 @@ mysql> select * from employee_payroll
 |  2 | Terisa  | 2000000.88 | 2019-05-13 |
 |  3 | Charlie | 6000000.88 | 2020-11-21 |
 +----+---------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cricket            |
+| empdb              |
+| football           |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use payroll_service;
+Database changed
+mysql> alter table employee_payroll add gender char(1) after name;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> decs employe_payroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'decs employe_payroll' at line 1
+mysql> desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee_payroll set gender = 'M' where name = 'Bill';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set gender = 'F' where name = 'Terisa';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set gender = 'M' where name = 'Charlie';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+------------+------------+
+| id | name    | gender | salary     | start      |
++----+---------+--------+------------+------------+
+|  1 | Bill    | M      | 1000000.88 | 2018-01-03 |
+|  2 | Terisa  | F      | 2000000.88 | 2019-05-13 |
+|  3 | Charlie | M      | 6000000.88 | 2020-11-21 |
++----+---------+--------+------------+------------+
 3 rows in set (0.00 sec)
 
 mysql>
